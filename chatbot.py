@@ -17,6 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
 # Charger la clé API depuis les variables d'environnement
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -123,3 +125,8 @@ async def chat_beaute(data: Question):
         return {"reponse": response.text.strip()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'appel à l'API Gemini : {str(e)}")
+    
+
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
